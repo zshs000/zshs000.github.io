@@ -125,26 +125,29 @@ const projects = [
           </div>
         ) : (
           <div class={`proj-block reveal`} style={`transition-delay: ${i * 0.06}s`}>
-            <a href={proj.link} class="proj-card" style={`--accent: ${proj.accent}`} target="_blank" rel="noopener">
-              <div class="proj-top">
+            <div class="proj-card" style={`--accent: ${proj.accent}`}>
+              <a href={proj.link} class="proj-top" target="_blank" rel="noopener">
                 <span class="proj-dot" style={`background: ${proj.accent}`}></span>
                 <span class="proj-dot" style="background: #f59e0b"></span>
                 <span class="proj-dot" style="background: #22c55e"></span>
                 <span class="proj-filename">{proj.title}</span>
-              </div>
+              </a>
               <div class="proj-body">
-                <h3 class="proj-title">{proj.title}</h3>
+                <h3 class="proj-title"><a href={proj.link} target="_blank" rel="noopener">{proj.title}</a></h3>
                 <p class="proj-desc">{proj.desc}</p>
                 {proj.highlights && (
-                  <ul class="proj-highlights">
-                    {proj.highlights.map(h => <li>{h}</li>)}
-                  </ul>
+                  <details class="proj-details">
+                    <summary class="proj-summary">查看详情</summary>
+                    <ul class="proj-highlights">
+                      {proj.highlights.map(h => <li>{h}</li>)}
+                    </ul>
+                  </details>
                 )}
                 <div class="proj-tags">
                   {proj.tags.map(tag => <span class="proj-tag">{tag}</span>)}
                 </div>
               </div>
-            </a>
+            </div>
           </div>
         )
       ))}
@@ -196,13 +199,11 @@ const projects = [
     overflow: hidden;
     box-shadow: var(--shadow-hard);
     transition: all 0.3s ease;
-    color: var(--text);
   }
 
   .proj-card:hover {
     box-shadow: 8px 8px 0px 0px var(--accent);
     transform: translateY(-4px);
-    color: var(--text);
   }
 
   .proj-top {
@@ -212,6 +213,8 @@ const projects = [
     padding: 0.6rem 1rem;
     border-bottom: 2px solid var(--border);
     background: var(--bg-subtle);
+    text-decoration: none;
+    color: var(--text);
   }
 
   .proj-dot {
@@ -239,11 +242,42 @@ const projects = [
     margin-bottom: 0.5rem;
   }
 
+  .proj-title a {
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .proj-title a:hover {
+    color: var(--accent);
+  }
+
   .proj-desc {
     font-size: 0.88rem;
     color: var(--text-secondary);
     line-height: 1.75;
     margin-bottom: 0.75rem;
+  }
+
+  .proj-details {
+    margin-bottom: 0.75rem;
+  }
+
+  .proj-summary {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--accent);
+    cursor: pointer;
+    padding: 0.3rem 0;
+    user-select: none;
+  }
+
+  .proj-summary:hover {
+    text-decoration: underline;
+  }
+
+  .proj-details[open] .proj-summary {
+    margin-bottom: 0.5rem;
   }
 
   .proj-highlights {

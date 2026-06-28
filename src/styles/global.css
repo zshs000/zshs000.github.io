@@ -46,6 +46,10 @@ section {
   padding: 4rem 0;
 }
 
+section:nth-of-type(even) {
+  background: #f8f9fa;
+}
+
 @media (min-width: 768px) {
   section { padding: 6rem 0; }
 }
