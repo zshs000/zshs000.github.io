@@ -1,0 +1,422 @@
+---
+const projects = [
+  {
+    title: 'EAQB 智能题库系统',
+    desc: '基于 Spring Cloud Alibaba 的微服务题库系统。项目动机来自医保局实习中对批量数据处理的真实观察。',
+    highlights: [
+      '网关认证上下文桥接：Sa-Token Reactor + HMAC 签名透传，登录态收敛到网关侧',
+      '异步 AI 处理：RocketMQ 解耦，GENERATE/VALIDATE 双模式 + 状态机 + CAS',
+      'Excel 导入重构：流式解析 + 分块暂存 + 对账提交，峰值内存降低 70%',
+      '验证码原子消费：Redis Lua compare-and-delete 防重复校验',
+      '对象存储抽象：工厂+策略模式统一 MinIO/OSS，字段收敛为 objectKey',
+    ],
+    tags: ['Spring Cloud Alibaba', 'RocketMQ', 'Redis', 'Sa-Token', 'EasyExcel', 'MinIO'],
+    link: 'https://github.com/zshs000/ExcelAIQ-Bank',
+    accent: '#3b82f6',
+  },
+  {
+    title: 'RAG-Bilibili',
+    desc: '基于 B 站视频字幕的检索增强问答系统。从研究 B 站接口到贡献 Spring AI Alibaba Bilibili Reader，再到基于组件做完整项目。',
+    highlights: [
+      '字幕导入稳定性：异常分流补偿链路，正常直读 + 异常探测重试',
+      '字幕降噪：多行窗口式清洗策略，强规则+弱阈值+可疑信号扩窗',
+      'RAG 核心链路：字幕导入、向量化存储、维度检索、上下文拼装、SSE 流式问答',
+    ],
+    tags: ['Spring Boot', 'Spring AI', 'DashVector', 'SSE', 'Vue3', 'MyBatis'],
+    link: 'https://github.com/zshs000/rag-bilibili',
+    accent: '#ff006e',
+  },
+  {
+    sectionTitle: '开源贡献（进行中）',
+    isSection: true,
+    contributions: [
+      { project: 'Spring AI Alibaba', pr: 'PR #175', desc: '深度重构 Bilibili Document Reader', status: '已合并', link: 'https://github.com/spring-ai-alibaba/spring-ai-extensions/pull/175' },
+      { project: 'Spring AI Alibaba', pr: 'PR #177', desc: '独立开发 CSDN Document Reader', status: '已合并', link: 'https://github.com/spring-ai-alibaba/spring-ai-extensions/pull/177' },
+      { project: 'Spring AI Alibaba', pr: 'PR #238', desc: 'DashScope EmbeddingModel 稀疏向量支持', status: '已合并', link: 'https://github.com/spring-ai-alibaba/spring-ai-extensions/pull/238' },
+      { project: 'Spring Cloud Alibaba', pr: 'PR #4244', desc: '修复 Nacos 敏感信息泄露漏洞', status: '已合并', link: 'https://github.com/alibaba/spring-cloud-alibaba/pull/4244' },
+      { project: 'Crowdin Java SDK', pr: 'PR #363', desc: '补充 AI 文件翻译功能（5 个接口）', status: '已合并', link: 'https://github.com/crowdin/crowdin-api-client-java/pull/363' },
+      { project: 'Bun (BoringSSL)', pr: 'Issue #32126', desc: '定位 AES-GCM VAES 路径静默错误', status: '修复中', link: 'https://github.com/oven-sh/bun/issues/32126' },
+    ],
+  },
+  {
+    sectionTitle: '其他项目',
+    isSection: true,
+  },
+  {
+    title: '多 AI 讨论室',
+    desc: '多厂商 AI 异构讨论室，DeepSeek、通义、Claude 等不同模型同台辩论。支持固定轮流和主持人调度两种编排模式。',
+    tags: ['JavaScript', 'Node.js', '多模型', 'SSE'],
+    link: 'https://github.com/zshs000/multi-ai-room',
+    accent: '#8b5cf6',
+  },
+  {
+    title: '问卷星自动化工具',
+    desc: '本地网页 + 问卷星解析 + Playwright 执行器。自动解析问卷页面结构，配置概率后直接执行。',
+    tags: ['TypeScript', 'Playwright', 'Node.js'],
+    link: 'https://github.com/zshs000/wjx-local-automation',
+    accent: '#f59e0b',
+  },
+  {
+    title: 'AI 通用提醒技能',
+    desc: '可在 Claude、Codex 等 AI 客户端中使用的本地提醒技能，npx 一键安装，自然语言添加提醒。',
+    tags: ['Python', 'npx', 'AI Skill'],
+    link: 'https://github.com/zshs000/task_scheduler',
+    accent: '#10b981',
+  },
+  {
+    title: '线下色卡采集工具集',
+    desc: '本地桌面软件，用于色卡图片 OCR 识别、重命名、截图和 Word 模板生成。包含离线 OCR、分组校验、YOLO 标注导出等功能。项目体现了从数据采集到模型微调的完整链路。',
+    tags: ['Python', 'OCR', '桌面软件', 'YOLO'],
+    link: 'https://github.com/zshs000/offline-color-card-toolkit',
+    accent: '#06b6d4',
+  },
+  {
+    title: '语音输入助手',
+    desc: '基于 Tauri 2 + React 的 Windows 桌面语音输入助手。集成 DashScope Qwen-ASR 实时中文识别，支持 AI 润色、剪贴板输出、自动插入和历史记录。',
+    tags: ['Tauri', 'React', 'TypeScript', 'ASR', 'Rust'],
+    link: 'https://github.com/zshs000/voice-input-assistant',
+    accent: '#ec4899',
+  },
+];
+---
+
+<section id="projects" style="padding-top: 2rem; padding-bottom: 3rem;">
+  <div class="container">
+    <div class="reveal">
+      <h2 class="section-title">项目</h2>
+      <p class="section-subtitle">// 从实习中发现问题，用代码解决，再回馈开源</p>
+    </div>
+
+    <div class="projects-list">
+      {projects.map((proj, i) => (
+        proj.isSection ? (
+          <div class="proj-section reveal">
+            <div class="proj-section-header">
+              <span class="divider-line"></span>
+              <span class="divider-text">{proj.sectionTitle}</span>
+              <span class="divider-line"></span>
+            </div>
+            {proj.contributions && (
+              <div class="contrib-card">
+                <div class="contrib-top">
+                  <span class="proj-dot" style="background: #8b5cf6"></span>
+                  <span class="proj-dot" style="background: #f59e0b"></span>
+                  <span class="proj-dot" style="background: #22c55e"></span>
+                  <span class="proj-filename">open-source-contributions</span>
+                </div>
+                <div class="contrib-table">
+                  <div class="contrib-row contrib-header">
+                    <span class="col-project">项目</span>
+                    <span class="col-pr">PR / Issue</span>
+                    <span class="col-desc">内容</span>
+                    <span class="col-status">状态</span>
+                  </div>
+                  {proj.contributions.map(c => (
+                    <a href={c.link} class="contrib-row" target="_blank" rel="noopener">
+                      <span class="col-project">{c.project}</span>
+                      <span class="col-pr">{c.pr}</span>
+                      <span class="col-desc">{c.desc}</span>
+                      <span class={`col-status status-${c.status === '已合并' ? 'merged' : c.status === '已发布' ? 'released' : 'pending'}`}>{c.status}</span>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        ) : (
+          <div class={`proj-block reveal`} style={`transition-delay: ${i * 0.06}s`}>
+            <a href={proj.link} class="proj-card" style={`--accent: ${proj.accent}`} target="_blank" rel="noopener">
+              <div class="proj-top">
+                <span class="proj-dot" style={`background: ${proj.accent}`}></span>
+                <span class="proj-dot" style="background: #f59e0b"></span>
+                <span class="proj-dot" style="background: #22c55e"></span>
+                <span class="proj-filename">{proj.title}</span>
+              </div>
+              <div class="proj-body">
+                <h3 class="proj-title">{proj.title}</h3>
+                <p class="proj-desc">{proj.desc}</p>
+                {proj.highlights && (
+                  <ul class="proj-highlights">
+                    {proj.highlights.map(h => <li>{h}</li>)}
+                  </ul>
+                )}
+                <div class="proj-tags">
+                  {proj.tags.map(tag => <span class="proj-tag">{tag}</span>)}
+                </div>
+              </div>
+            </a>
+          </div>
+        )
+      ))}
+      <a href="https://github.com/zshs000?tab=repositories" class="more-link reveal" target="_blank" rel="noopener">
+        更多项目请访问我的 GitHub &rarr;
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .projects-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .proj-section {
+    padding: 1rem 0 0.5rem;
+  }
+
+  .proj-section-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .divider-line {
+    flex: 1;
+    height: 2px;
+    background: var(--border);
+  }
+
+  .divider-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+
+  .proj-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-white);
+    border: 2px solid var(--border);
+    border-radius: 0.75rem;
+    overflow: hidden;
+    box-shadow: var(--shadow-hard);
+    transition: all 0.3s ease;
+    color: var(--text);
+  }
+
+  .proj-card:hover {
+    box-shadow: 8px 8px 0px 0px var(--accent);
+    transform: translateY(-4px);
+    color: var(--text);
+  }
+
+  .proj-top {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.6rem 1rem;
+    border-bottom: 2px solid var(--border);
+    background: var(--bg-subtle);
+  }
+
+  .proj-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(0,0,0,0.08);
+  }
+
+  .proj-filename {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    margin-left: 0.5rem;
+  }
+
+  .proj-body {
+    padding: 1.25rem 1.5rem 1.5rem;
+  }
+
+  .proj-title {
+    font-size: 1.15rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+  }
+
+  .proj-desc {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    line-height: 1.75;
+    margin-bottom: 0.75rem;
+  }
+
+  .proj-highlights {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 0.75rem 0;
+  }
+
+  .proj-highlights li {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    padding: 0.3rem 0;
+    padding-left: 1.2rem;
+    position: relative;
+    line-height: 1.6;
+  }
+
+  .proj-highlights li::before {
+    content: '>';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  .proj-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-top: 0.5rem;
+  }
+
+  .proj-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    padding: 2px 10px;
+    border-radius: 0.5rem;
+    background: var(--bg-subtle);
+    color: var(--text-secondary);
+    border: 1px solid #e4e4e7;
+    font-weight: 500;
+  }
+
+  .more-link {
+    display: block;
+    text-align: center;
+    padding: 1rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    border: 2px dashed #d4d4d8;
+    border-radius: 0.75rem;
+    transition: all 0.25s ease;
+  }
+
+  .more-link:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+    background: rgba(255, 0, 110, 0.03);
+  }
+
+  /* ── Contribution table ── */
+
+  .contrib-card {
+    background: var(--bg-white);
+    border: 2px solid var(--border);
+    border-radius: 0.75rem;
+    overflow: hidden;
+    box-shadow: var(--shadow-hard);
+    transition: all 0.3s ease;
+  }
+
+  .contrib-card:hover {
+    box-shadow: var(--shadow-accent);
+    transform: translateY(-2px);
+  }
+
+  .contrib-top {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.6rem 1rem;
+    border-bottom: 2px solid var(--border);
+    background: var(--bg-subtle);
+  }
+
+  .contrib-table {
+    padding: 0;
+  }
+
+  .contrib-row {
+    display: grid;
+    grid-template-columns: 160px 110px 1fr 72px;
+    align-items: center;
+    padding: 0.6rem 1.25rem;
+    gap: 0.75rem;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 0.82rem;
+    transition: background 0.15s;
+    text-decoration: none;
+    color: var(--text);
+  }
+
+  .contrib-row:last-child {
+    border-bottom: none;
+  }
+
+  a.contrib-row:hover {
+    background: var(--bg-subtle);
+    color: var(--text);
+  }
+
+  .contrib-header {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    background: var(--bg-subtle);
+    border-bottom: 2px solid var(--border);
+    pointer-events: none;
+  }
+
+  .col-project {
+    font-weight: 700;
+    font-size: 0.82rem;
+  }
+
+  .col-pr {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+  }
+
+  .col-desc {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+  }
+
+  .col-status {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    font-weight: 600;
+    text-align: center;
+    padding: 2px 0;
+    border-radius: 0.5rem;
+  }
+
+  .status-merged {
+    color: #16a34a;
+    background: rgba(34, 197, 94, 0.08);
+  }
+
+  .status-released {
+    color: #3b82f6;
+    background: rgba(59, 130, 246, 0.08);
+  }
+
+  .status-pending {
+    color: #f59e0b;
+    background: rgba(245, 158, 11, 0.08);
+  }
+
+  @media (max-width: 768px) {
+    .contrib-row {
+      grid-template-columns: 1fr;
+      gap: 0.15rem;
+      padding: 0.75rem 1.25rem;
+    }
+    .contrib-header { display: none; }
+    .col-project::before { content: ''; }
+    .col-pr { font-size: 0.7rem; }
+    .col-status { text-align: left; width: fit-content; padding: 2px 8px; }
+  }
+</style>

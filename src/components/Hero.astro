@@ -1,0 +1,179 @@
+---
+---
+
+<section id="about" class="hero">
+  <div class="container hero-inner">
+    <div class="hero-left">
+      <div class="avatar-box">
+        <img src="https://avatars.githubusercontent.com/u/143915664?v=4&s=160" alt="周硕" width="160" height="160" loading="eager" />
+      </div>
+    </div>
+    <div class="hero-text">
+      <p class="greeting">你好，我是</p>
+      <h1 class="name">周硕</h1>
+      <p class="title-role">
+        &gt; <span class="typing-text">Java 后端开发实习生</span><span class="cursor">_</span>
+      </p>
+      <p class="bio">
+        湖南科技大学 数据科学与大数据技术 本科在读。
+        专注于 Java 后端与 AI 应用开发，
+        擅长 Spring Cloud 微服务架构与大模型工程化落地。
+        活跃的开源贡献者，向 Spring AI Alibaba、Spring Cloud Alibaba 等项目提交过 PR。
+      </p>
+      <div class="hero-actions">
+        <a href="https://github.com/zshs000" class="btn btn-primary" target="_blank">GitHub</a>
+        <a href="#projects" class="btn btn-ghost">查看项目</a>
+      </div>
+      <blockquote class="quote">
+        <p>"Controlling complexity is the essence of computer programming."</p>
+        <cite>— Brian Kernighan</cite>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid var(--border);
+    background: var(--bg);
+  }
+
+  .hero-inner {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    padding: 3rem 0;
+  }
+
+  .avatar-box {
+    width: 160px;
+    height: 160px;
+    border: 2px solid var(--border);
+    border-radius: 0.75rem;
+    background: var(--bg-white);
+    box-shadow: var(--shadow-hard-lg);
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .avatar-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .greeting {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 0.4rem;
+  }
+
+  .name {
+    font-size: 3.2rem;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+    margin-bottom: 0.6rem;
+    color: var(--text);
+  }
+
+  .title-role {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1rem;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 1.25rem;
+  }
+
+  .cursor { animation: blink 1s step-end infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  .bio {
+    max-width: 500px;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin-bottom: 1.75rem;
+    line-height: 1.8;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.7rem 1.5rem;
+    border-radius: 0.5rem;
+    font-size: 0.88rem;
+    font-weight: 600;
+    transition: all 0.25s ease;
+    cursor: pointer;
+    border: 2px solid var(--border);
+  }
+
+  .btn-primary {
+    background: var(--text);
+    color: var(--bg);
+    box-shadow: var(--shadow-hard);
+  }
+
+  .btn-primary:hover {
+    background: var(--accent);
+    color: white;
+    box-shadow: var(--shadow-accent);
+    transform: translate(2px, 2px);
+  }
+
+  .btn-ghost {
+    background: var(--bg-white);
+    color: var(--text);
+  }
+
+  .btn-ghost:hover {
+    box-shadow: var(--shadow-hard);
+    transform: translateY(-2px);
+  }
+
+  .quote {
+    border-left: 3px solid var(--border);
+    padding: 0.75rem 1.25rem;
+    max-width: 480px;
+  }
+
+  .quote p {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    font-style: italic;
+    margin-bottom: 0.3rem;
+  }
+
+  .quote cite {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    font-style: normal;
+  }
+
+  @media (max-width: 640px) {
+    .hero-inner {
+      flex-direction: column;
+      text-align: center;
+      gap: 2rem;
+    }
+    .name { font-size: 2.5rem; }
+    .avatar-box { width: 120px; height: 120px; }
+    .bio { margin: 0 auto 1.75rem; }
+    .hero-actions { justify-content: center; }
+    .quote { margin: 0 auto; }
+  }
+</style>

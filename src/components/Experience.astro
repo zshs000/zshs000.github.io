@@ -1,0 +1,355 @@
+---
+const experiences = [
+  {
+    period: '2023.09 - 2027.06',
+    role: '数据科学与大数据技术 | 本科',
+    company: '湖南科技大学',
+    desc: '在校期间系统学习 Java、数据库、分布式系统等课程，自学 Spring 生态并投入开源实践。',
+    tags: ['Java', '数据库', '分布式', '算法'],
+    status: 'education',
+    icon: 'E',
+  },
+  {
+    period: '2025.06 - 2025.09',
+    role: '系统支持与数据分析实习生',
+    company: '隆回县医疗保障局',
+    desc: '针对旧系统缺乏批量 API 的问题，实现基于 RPA 的自动化流程（1天→3小时，准确率 100%）。清洗上万条异常数据，导入成功率从 40% 提升至 98%。基于 Coze 平台搭建医保政策知识问答智能体，完成 RAG 在政务场景的初步验证。实习期间接触了数据采集自动化，后来深入研究了 B 站数据接口和鉴权体系 —— 这段经历直接推动了后续的 EAQB 项目和 Spring AI Alibaba 开源贡献。',
+    tags: ['RPA', '数据清洗', 'Coze', 'RAG 初探'],
+    status: 'complete',
+    icon: '01',
+  },
+  {
+    period: '2025.09 - 2026.05',
+    role: 'Java 后端开发（个人项目）',
+    company: 'EAQB 智能题库系统',
+    desc: '医保局实习中观察到批量数据处理、格式校验、错误反馈等真实痛点，由此设计了这套基于 Spring Cloud Alibaba 的微服务题库系统。涵盖网关认证桥接（Sa-Token + HMAC）、RocketMQ 异步 AI 处理（GENERATE/VALIDATE 双模式 + 状态机 + CAS）、Excel 流式导入重构（峰值内存降低 70%）、Redis Lua 原子验证码消费、对象存储抽象（工厂+策略模式统一 MinIO/OSS）等核心设计。',
+    tags: ['Spring Cloud Alibaba', 'RocketMQ', 'Redis', 'Sa-Token', 'EasyExcel'],
+    status: 'complete',
+    icon: '02',
+  },
+  {
+    period: '2026 初 - 至今',
+    role: '开源贡献（持续进行中）',
+    company: 'Spring AI Alibaba / Spring Cloud Alibaba / Crowdin / Bun',
+    desc: '2026 年初开始接触开源。从 Spring Cloud Alibaba 起步，逐步向 Spring AI Alibaba、Crowdin 等项目提交 PR。最近追踪并定位了 Bun BoringSSL 底层的 AES-GCM bug，Bun 官方已据此提交修复。',
+    tags: ['Spring Cloud Alibaba', 'Spring AI Alibaba', 'Crowdin', 'Bun'],
+    status: 'current',
+    icon: '03',
+  },
+  {
+    period: '2026.03 - 2026.04',
+    role: 'Java 后端开发（个人项目）',
+    company: 'RAG-Bilibili',
+    desc: 'Bilibili Reader 组件修好了，顺理成章基于它做了这个完整项目。基于 B 站视频字幕的检索增强问答系统，完成字幕导入稳定性优化（异常分流补偿链路）、多行窗口式字幕降噪（强规则+弱阈值+可疑信号扩窗）、RAG 核心链路开发（向量化存储、维度检索、上下文拼装、SSE 流式问答）。验证了 Spring AI Alibaba 组件在真实业务中的可用性。',
+    tags: ['Spring AI', 'DashVector', 'SSE', 'Vue3', 'RAG'],
+    status: 'complete',
+    icon: '04',
+  },
+  {
+    period: '2026.05 - 2026.06',
+    role: 'Java 后端开发实习生',
+    company: '来未来科技（熙牛医疗）',
+    desc: '第一次进入企业级生产环境。分析慢查询日志优化高频查询；重构双向转诊模块，将混在通用 Controller 中的门诊接口拆分归位；基于 traceId 定位分布式链路异常；参与隐私数据加密方案调整，完成 SM4 加密工具类封装。',
+    tags: ['慢查询优化', '代码重构', '分布式排查', 'SM4 加密'],
+    status: 'complete',
+    icon: '05',
+  },
+  {
+    period: '未来',
+    role: '持续深耕',
+    company: '下一站',
+    desc: '持续深耕 AI Agent Harness 工程，探索模型与环境之间的工程化桥梁。正在寻找 Java 后端开发实习机会，希望在生产级系统中进一步打磨工程能力。',
+    tags: ['Harness 工程', 'Agent 基础设施', 'Java 后端实习'],
+    status: 'future',
+    icon: '→',
+  },
+];
+---
+
+<section id="experience" style="padding-top: 2rem; padding-bottom: 3rem;">
+  <div class="container">
+    <div class="reveal">
+      <h2 class="section-title">经历</h2>
+      <p class="section-subtitle">// 从发现问题到动手解决，每一步都在推动下一步</p>
+    </div>
+
+    <div class="tl-wrapper">
+      <div class="tl-line"></div>
+
+      {experiences.map((exp) => (
+        <div class={`tl-item ${exp.status === 'current' ? 'tl-current' : ''}`}>
+          <div class="tl-node">
+            <div class={`tl-dot ${
+              exp.status === 'current' ? 'dot-active' :
+              exp.status === 'education' ? 'dot-edu' :
+              exp.status === 'future' ? 'dot-future' : 'dot-done'
+            }`}>
+              <span class="dot-icon">{exp.icon}</span>
+            </div>
+          </div>
+          <div class={`tl-card ${exp.status === 'future' ? 'tl-card-future' : ''}`}>
+            <div class="tl-period">
+              <span class={`tl-badge ${
+                exp.status === 'current' ? 'badge-active' :
+                exp.status === 'education' ? 'badge-edu' :
+                exp.status === 'future' ? 'badge-future' : 'badge-done'
+              }`}>
+                {exp.status === 'current' ? '● 进行中' :
+                 exp.status === 'education' ? 'E 教育' :
+                 exp.status === 'future' ? '→ 未来' : '✓ 完成'}
+              </span>
+              <span class="tl-time">{exp.period}</span>
+            </div>
+            <h3 class="tl-role">{exp.role}</h3>
+            <p class="tl-company">{exp.company}</p>
+            <p class="tl-desc">{exp.desc}</p>
+            <div class="tl-tags">
+              {exp.tags.map(tag => <span class="tl-tag">{tag}</span>)}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .tl-wrapper {
+    position: relative;
+    padding: 1rem 0;
+  }
+
+  .tl-line {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--border);
+    transform: translateX(-50%);
+  }
+
+  .tl-item {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    width: 50%;
+    padding: 0 2.5rem 2.5rem 0;
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  .tl-item.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .tl-item:nth-child(1) { transition-delay: 0s; }
+  .tl-item:nth-child(2) { transition-delay: 0.08s; }
+  .tl-item:nth-child(3) { transition-delay: 0.16s; }
+  .tl-item:nth-child(4) { transition-delay: 0.24s; }
+  .tl-item:nth-child(5) { transition-delay: 0.32s; }
+  .tl-item:nth-child(6) { transition-delay: 0.4s; }
+  .tl-item:nth-child(7) { transition-delay: 0.48s; }
+
+  .tl-item:nth-child(even) {
+    margin-left: 50%;
+    padding: 0 0 2.5rem 2.5rem;
+    flex-direction: row-reverse;
+  }
+
+  .tl-node {
+    position: absolute;
+    top: 0.4rem;
+    z-index: 3;
+  }
+
+  .tl-item .tl-node { right: -8px; }
+  .tl-item:nth-child(even) .tl-node { left: -8px; right: auto; }
+
+  .tl-dot {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 3px solid var(--bg);
+    box-shadow: 0 0 0 2px var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .dot-icon {
+    position: absolute;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.45rem;
+    font-weight: 700;
+    color: white;
+    line-height: 1;
+  }
+
+  .dot-active {
+    background: var(--accent);
+    box-shadow: 0 0 0 2px var(--accent), 0 0 0 5px rgba(255, 0, 110, 0.15);
+    animation: dotPulse 2s ease-in-out infinite;
+  }
+
+  .dot-done {
+    background: #22c55e;
+    box-shadow: 0 0 0 2px #22c55e, 0 0 0 5px rgba(34, 197, 94, 0.1);
+  }
+
+  .dot-edu {
+    background: var(--text);
+    box-shadow: 0 0 0 2px var(--text), 0 0 0 5px rgba(24, 24, 27, 0.1);
+  }
+
+  .dot-future {
+    background: transparent;
+    border: 2px dashed var(--text-muted);
+    box-shadow: none;
+  }
+
+  @keyframes dotPulse {
+    0%, 100% { box-shadow: 0 0 0 2px var(--accent), 0 0 0 5px rgba(255, 0, 110, 0.15); }
+    50% { box-shadow: 0 0 0 2px var(--accent), 0 0 0 8px rgba(255, 0, 110, 0.08); }
+  }
+
+  .tl-card {
+    background: var(--bg-white);
+    border: 2px solid var(--border);
+    border-radius: 0.75rem;
+    padding: 1.25rem 1.5rem;
+    box-shadow: var(--shadow-hard);
+    transition: all 0.3s ease;
+    width: 100%;
+  }
+
+  .tl-card:hover {
+    box-shadow: var(--shadow-accent-lg);
+    transform: translateY(-3px);
+  }
+
+  .tl-card-future {
+    border: 2px solid #e4e4e7;
+    box-shadow: none;
+    background: repeating-linear-gradient(
+      -45deg,
+      var(--bg-white),
+      var(--bg-white) 8px,
+      #fafafa 8px,
+      #fafafa 16px
+    );
+  }
+
+  .tl-card-future:hover {
+    box-shadow: var(--shadow-hard);
+    border-color: var(--border);
+  }
+
+  .tl-card-future .tl-desc {
+    color: var(--text-muted);
+  }
+
+  .tl-period {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.65rem;
+  }
+
+  .tl-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    font-weight: 600;
+    padding: 2px 10px;
+    border-radius: 9999px;
+    border: 2px solid;
+  }
+
+  .badge-active {
+    color: var(--accent);
+    border-color: var(--accent);
+    background: rgba(255, 0, 110, 0.06);
+  }
+
+  .badge-done {
+    color: #16a34a;
+    border-color: #22c55e;
+    background: rgba(34, 197, 94, 0.06);
+  }
+
+  .badge-edu {
+    color: var(--text);
+    border-color: var(--text);
+    background: rgba(24, 24, 27, 0.04);
+  }
+
+  .badge-future {
+    color: var(--text-muted);
+    border-color: var(--text-muted);
+    border-style: dashed;
+    background: transparent;
+  }
+
+  .tl-time {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  .tl-role {
+    font-size: 1.1rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.15rem;
+  }
+
+  .tl-company {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin-bottom: 0.6rem;
+  }
+
+  .tl-desc {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    line-height: 1.75;
+    margin-bottom: 0.9rem;
+  }
+
+  .tl-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+
+  .tl-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    padding: 2px 10px;
+    border-radius: 0.5rem;
+    background: var(--bg-subtle);
+    color: var(--text-secondary);
+    border: 1px solid #e4e4e7;
+    font-weight: 500;
+  }
+
+  @media (max-width: 768px) {
+    .tl-line { left: 1rem; transform: none; }
+    .tl-item, .tl-item:nth-child(even) {
+      width: 100%; margin-left: 0;
+      padding: 0 0 2rem 2.5rem; flex-direction: row;
+    }
+    .tl-item .tl-node, .tl-item:nth-child(even) .tl-node {
+      left: calc(1rem - 8px); right: auto;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tl-item { opacity: 1; transform: none; transition: none; }
+    .dot-active { animation: none; }
+  }
+</style>

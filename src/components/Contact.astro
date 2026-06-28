@@ -1,0 +1,227 @@
+---
+const links = [
+  { icon: 'GH', label: 'zshs000', sub: 'GitHub', href: 'https://github.com/zshs000' },
+  { icon: 'CS', label: 'zsy520real', sub: 'CSDN 技术博客', href: 'https://blog.csdn.net/zsy520real' },
+  { icon: '@', label: '2862877643@qq.com', sub: '邮箱联系', href: 'mailto:2862877643@qq.com' },
+];
+---
+
+<section id="contact" style="padding-top: 2rem;">
+  <div class="container">
+    <div class="reveal">
+      <h2 class="section-title">联系我</h2>
+      <p class="section-subtitle">// 欢迎交流</p>
+    </div>
+
+    <div class="contact-layout">
+      <div class="contact-links">
+        {links.map((link) => (
+          <a href={link.href} class="contact-card" target="_blank" rel="noopener">
+            <span class="contact-icon">{link.icon}</span>
+            <div class="contact-text">
+              <span class="contact-label">{link.label}</span>
+              <span class="contact-sub">{link.sub}</span>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <div class="status-card reveal">
+        <div class="status-top">
+          <span class="dot" style="width:10px;height:10px;border-radius:50%;background:#22c55e;border:1.5px solid rgba(0,0,0,0.08)"></span>
+          <span class="dot" style="width:10px;height:10px;border-radius:50%;background:#f59e0b;border:1.5px solid rgba(0,0,0,0.08)"></span>
+          <span class="dot" style="width:10px;height:10px;border-radius:50%;background:#ef4444;border:1.5px solid rgba(0,0,0,0.08)"></span>
+          <span class="status-filename">status.md</span>
+        </div>
+        <div class="status-body">
+          <div class="status-row">
+            <span class="status-key">状态</span>
+            <span class="status-val status-open">● 寻找 Java 后端实习机会</span>
+          </div>
+          <div class="status-row">
+            <span class="status-key">学历</span>
+            <span class="status-val">湖南科技大学 数据科学与大数据技术 本科在读</span>
+          </div>
+          <div class="status-row">
+            <span class="status-key">方向</span>
+            <span class="status-val">Java 后端 / AI 应用开发 / Agent Harness</span>
+          </div>
+          <div class="status-row">
+            <span class="status-key">擅长</span>
+            <span class="status-val">Spring Cloud / Redis / RocketMQ / RAG</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container footer-inner">
+    <span class="footer-logo">zshs000.</span>
+    <p class="footer-text">Built with Astro &middot; 2026</p>
+  </div>
+</footer>
+
+<style>
+  .contact-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  /* ── Status card ── */
+
+  .status-card {
+    background: var(--bg-white);
+    border: 2px solid var(--border);
+    border-radius: 0.75rem;
+    overflow: hidden;
+    box-shadow: var(--shadow-hard);
+  }
+
+  .status-top {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.6rem 1rem;
+    border-bottom: 2px solid var(--border);
+    background: var(--bg-subtle);
+  }
+
+  .status-filename {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    margin-left: 0.5rem;
+  }
+
+  .status-body {
+    padding: 1rem 1.25rem;
+  }
+
+  .status-row {
+    display: flex;
+    gap: 0.75rem;
+    padding: 0.45rem 0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .status-row:last-child {
+    border-bottom: none;
+  }
+
+  .status-key {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    width: 48px;
+    flex-shrink: 0;
+  }
+
+  .status-val {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  .status-open {
+    color: #16a34a;
+    font-weight: 600;
+  }
+
+  /* ── Contact links ── */
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .contact-card {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.85rem 1rem;
+    background: var(--bg-white);
+    border: 2px solid var(--border);
+    border-radius: 0.75rem;
+    box-shadow: var(--shadow-hard);
+    color: var(--text);
+    transition: all 0.3s ease;
+  }
+
+  .contact-card:hover {
+    box-shadow: var(--shadow-accent);
+    transform: translateY(-3px);
+    color: var(--text);
+  }
+
+  .contact-icon {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 0.7rem;
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--text);
+    color: var(--bg);
+    border-radius: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  .contact-card:hover .contact-icon {
+    background: var(--accent);
+    color: white;
+  }
+
+  .contact-text {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .contact-label {
+    font-weight: 700;
+    font-size: 0.9rem;
+  }
+
+  .contact-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+  }
+
+  @media (max-width: 768px) {
+    .contact-layout { grid-template-columns: 1fr; }
+  }
+
+  footer {
+    border-top: 2px solid var(--border);
+    padding: 2rem 0;
+  }
+
+  .footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .footer-logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--text);
+  }
+
+  .footer-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+</style>

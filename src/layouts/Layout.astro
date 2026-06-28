@@ -1,0 +1,72 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = '个人经历展示' } = Astro.props;
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+    <script>
+      // Scroll reveal
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+      // Navbar scroll
+      const nav = document.querySelector('nav');
+      window.addEventListener('scroll', () => {
+        nav?.classList.toggle('scrolled', window.scrollY > 40);
+      });
+
+      // Typing effect
+      const typingEl = document.querySelector('.typing-text');
+      if (typingEl) {
+        const roles = ['全栈开发工程师', '开源爱好者', '技术博主', '终身学习者'];
+        let roleIdx = 0, charIdx = 0, deleting = false;
+        function type() {
+          const role = roles[roleIdx];
+          if (!deleting) {
+            typingEl!.textContent = role.substring(0, charIdx + 1);
+            charIdx++;
+            if (charIdx === role.length) { deleting = true; setTimeout(type, 2000); return; }
+          } else {
+            typingEl!.textContent = role.substring(0, charIdx - 1);
+            charIdx--;
+            if (charIdx === 0) { deleting = false; roleIdx = (roleIdx + 1) % roles.length; }
+          }
+          setTimeout(type, deleting ? 60 : 120);
+        }
+        setTimeout(type, 800);
+      }
+
+      // Timeline scroll-in
+      const tlObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) entry.target.classList.add('in-view');
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+      document.querySelectorAll('.tl-item').forEach(el => tlObserver.observe(el));
+    </script>
+    <style is:global>
+      @import '../styles/global.css';
+    </style>
+  </body>
+</html>
